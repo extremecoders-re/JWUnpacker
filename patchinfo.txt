@@ -1,0 +1,22 @@
+These params must be present (exact match)
+------------------------------------------------
+-Dcom.ibm.tools.attach.enable=false
+-XX:+DisableAttachMechanism
+
+These params must not be present (starts with)
+------------------------------------------------
+-dcom.sun.management.jmxremote
+-xrun
+-agentlib
+-agentpath
+-javaagent
+-xx:+trace
+-xx:+compile
+
+JWServer patches the strings above as follows
+-------------------------------------------------
+-Dcom.ibm.tools.attach.enable=false => -Xmixed
+-XX:+DisableAttachMechanism => -Xmixed
+-agentlib => -nonexistentparam
+
+Hence, we need to run with the -Xmixed argument.
